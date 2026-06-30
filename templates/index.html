@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AI-powered Pakistani currency note distribution predictor. Instantly calculate optimal note breakdown for any amount using machine learning.">
-    <title>PakNotes AI — Currency Note Distribution Predictor</title>
+    <meta name="description" content="PakNotes AI uses a trained Random Forest model to instantly predict the optimal distribution of Pakistani currency notes for any amount. Free, instant, no sign-up.">
+    <meta name="keywords" content="Pakistani currency notes, currency distribution, random forest AI, note predictor, Pakistan currency calculator, machine learning currency">
+    <title>PakNotes AI — Instant Pakistani Currency Note Distribution</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,7 +33,7 @@
     <!-- ===== NAVBAR ===== -->
     <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
-            <a href="#hero" class="nav-logo" aria-label="PakNotes AI Home">
+            <a href="#hero" class="nav-logo" aria-label="PakNotes AI — Go to homepage">
                 <div class="logo-icon-wrap">
                     <i class="fa-solid fa-money-bill-wave" aria-hidden="true"></i>
                 </div>
@@ -42,18 +43,18 @@
             <div class="nav-links" id="navLinks">
                 <a href="#hero" class="nav-link">Home</a>
                 <a href="#how-it-works" class="nav-link">How It Works</a>
-                <a href="#resultsPanel" class="nav-link">Predict</a>
+                <a href="#resultsPanel" class="nav-link">Try It</a>
                 <a href="https://github.com/veosdrnawaz" target="_blank" rel="noopener noreferrer" class="nav-link">
                     <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub
                 </a>
             </div>
 
             <div class="nav-actions">
-                <button id="themeToggleBtn" class="theme-toggle" aria-label="Toggle color theme">
+                <button id="themeToggleBtn" class="theme-toggle" aria-label="Toggle between light and dark mode">
                     <i class="fa-solid fa-moon moon-icon" aria-hidden="true"></i>
                     <i class="fa-solid fa-sun sun-icon" aria-hidden="true"></i>
                 </button>
-                <button class="nav-mobile-toggle" id="mobileMenuBtn" aria-label="Toggle mobile menu" aria-expanded="false">
+                <button class="nav-mobile-toggle" id="mobileMenuBtn" aria-label="Open navigation menu" aria-expanded="false">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -66,37 +67,37 @@
     <section class="hero-section" id="hero">
         <div class="hero-container">
 
-            <!-- Left: Content + Form -->
+            <!-- Left: Copy + Form -->
             <div class="hero-left">
-                <div class="hero-badge" aria-label="AI-Powered feature badge">
+                <div class="hero-badge" aria-label="Technology badge">
                     <div class="badge-dot" aria-hidden="true"></div>
-                    <span>AI-Powered Prediction</span>
+                    <span>Random Forest ML &middot; Live &amp; Accurate</span>
                 </div>
 
                 <h1 class="hero-heading">
-                    Pakistani Currency<br>
-                    <span class="gradient-text">Note Distribution</span>
+                    Currency Notes,<br>
+                    <span class="gradient-text">Distributed by AI.</span>
                 </h1>
 
                 <p class="hero-subtitle">
-                    Predict the optimal breakdown of Pakistani currency notes instantly using our RandomForest ML model. Fast, accurate, and always reliable.
+                    Type an amount. Our trained model instantly tells you exactly how many notes of each denomination you need — from Rs.1,000 down to Rs.10. No estimation. Pure precision.
                 </p>
 
-                <!-- Input Card -->
+                <!-- Prediction Card -->
                 <div class="input-card glass-card">
                     <div class="input-card-header">
                         <div class="input-card-icon" aria-hidden="true">
-                            <i class="fa-solid fa-calculator"></i>
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
                         </div>
                         <div>
-                            <div class="input-card-title">Predict Distribution</div>
-                            <div class="input-card-subtitle">Enter any amount for instant note breakdown</div>
+                            <div class="input-card-title">Generate Your Note Breakdown</div>
+                            <div class="input-card-subtitle">Powered by a trained Random Forest model</div>
                         </div>
                     </div>
 
                     <form id="predictionForm" onsubmit="event.preventDefault();" novalidate>
                         <div class="field-group">
-                            <label class="field-label" for="amountInput">Amount (PKR)</label>
+                            <label class="field-label" for="amountInput">Target Amount</label>
                             <div class="input-wrapper">
                                 <div class="input-prefix" aria-hidden="true">
                                     <i class="fa-solid fa-rupee-sign"></i>
@@ -106,7 +107,7 @@
                                     type="number"
                                     id="amountInput"
                                     class="amount-input"
-                                    placeholder="e.g. 5230"
+                                    placeholder="e.g. 15,000"
                                     min="10"
                                     max="500000"
                                     step="10"
@@ -117,14 +118,14 @@
                             </div>
                             <p class="field-hint" id="fieldHint">
                                 <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
-                                Multiples of 10 only &middot; Min: Rs.&nbsp;10 &middot; Max: Rs.&nbsp;500,000
+                                Any multiple of Rs.10 &middot; Minimum Rs.10 &middot; Maximum Rs.500,000
                             </p>
                         </div>
 
                         <!-- Error Banner -->
                         <div class="error-banner" id="errorBanner" role="alert" aria-live="polite">
                             <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
-                            <span id="errorMessage">Invalid amount entered.</span>
+                            <span id="errorMessage">Please check your amount and try again.</span>
                         </div>
 
                         <!-- Action Buttons -->
@@ -132,7 +133,7 @@
                             <button type="submit" id="predictBtn" class="btn btn-primary">
                                 <span class="btn-text">
                                     <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
-                                    Predict Notes
+                                    Generate Distribution
                                 </span>
                                 <div class="btn-loader" aria-hidden="true">
                                     <div class="spinner-ring"></div>
@@ -140,20 +141,20 @@
                             </button>
                             <button type="button" id="resetBtn" class="btn btn-ghost">
                                 <i class="fa-solid fa-rotate-left" aria-hidden="true"></i>
-                                Reset
+                                Start Over
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
 
-            <!-- Right: Visual Card -->
+            <!-- Right: Animated Preview Card -->
             <div class="hero-right" aria-hidden="true">
                 <div class="hero-visual">
                     <div class="visual-card-main glass-card">
                         <div class="visual-header">
                             <div class="visual-amount">Rs. 5,230</div>
-                            <div class="visual-label">Sample Output</div>
+                            <div class="visual-label">Live Preview</div>
                         </div>
                         <div class="visual-notes">
                             <div class="visual-note"><span class="vn-label">Rs. 1000</span><span class="vn-count">5 notes</span></div>
@@ -165,17 +166,17 @@
                         </div>
                         <div class="visual-status-bar">
                             <i class="fa-solid fa-circle-check"></i>
-                            <span>Distribution Valid</span>
+                            <span>Verified &amp; Accurate</span>
                             <span class="visual-total">Total: Rs. 5,230</span>
                         </div>
                     </div>
                     <div class="visual-float visual-float-1 glass-card">
                         <i class="fa-solid fa-robot"></i>
-                        <span>ML Model Active</span>
+                        <span>Random Forest Active</span>
                     </div>
                     <div class="visual-float visual-float-2 glass-card">
                         <i class="fa-solid fa-bolt"></i>
-                        <span>Instant Results</span>
+                        <span>&lt; 1s Response</span>
                     </div>
                 </div>
             </div>
@@ -187,28 +188,28 @@
     <section class="how-section" id="how-it-works">
         <div class="section-container">
             <div class="section-header">
-                <div class="section-tag">Simple Process</div>
-                <h2>How It Works</h2>
-                <p>Three simple steps to get your optimal currency note distribution</p>
+                <div class="section-tag">Zero to Results</div>
+                <h2>Results in Three Steps</h2>
+                <p>No account. No configuration. Just your amount and an instant AI-powered breakdown.</p>
             </div>
             <div class="steps-grid">
                 <div class="step-card glass-card">
                     <div class="step-num">01</div>
                     <div class="step-icon"><i class="fa-solid fa-keyboard" aria-hidden="true"></i></div>
-                    <h3>Enter Amount</h3>
-                    <p>Type any amount that is a multiple of 10, between Rs. 10 and Rs. 500,000.</p>
+                    <h3>Type Any Amount</h3>
+                    <p>Enter any value divisible by Rs.10 — from as low as Rs.10 up to Rs.500,000. No sign-up. No friction. Completely free.</p>
                 </div>
                 <div class="step-card glass-card">
                     <div class="step-num">02</div>
                     <div class="step-icon"><i class="fa-solid fa-brain" aria-hidden="true"></i></div>
-                    <h3>AI Analysis</h3>
-                    <p>Our RandomForest ML model instantly predicts the optimal note breakdown with high accuracy.</p>
+                    <h3>Model Runs Instantly</h3>
+                    <p>A trained Random Forest algorithm analyses your input and computes the most efficient denomination combination in milliseconds.</p>
                 </div>
                 <div class="step-card glass-card">
                     <div class="step-num">03</div>
                     <div class="step-icon"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i></div>
-                    <h3>Get Results</h3>
-                    <p>View the per-denomination breakdown, export as CSV or PDF, and track your history.</p>
+                    <h3>Your Breakdown, Ready</h3>
+                    <p>See a precise per-denomination breakdown. Download a professional CSV or PDF report. Every prediction is saved locally for easy reference.</p>
                 </div>
             </div>
         </div>
@@ -223,55 +224,55 @@
                 <div class="idle-icon-wrap" aria-hidden="true">
                     <i class="fa-solid fa-wallet"></i>
                 </div>
-                <h3>Ready to Predict</h3>
-                <p>Enter an amount above and click <strong>Predict Notes</strong> to generate the optimal currency distribution instantly.</p>
-                <div class="idle-features" aria-label="Features list">
-                    <span><i class="fa-solid fa-circle-check" aria-hidden="true"></i> ML-powered accuracy</span>
-                    <span><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Instant results</span>
-                    <span><i class="fa-solid fa-circle-check" aria-hidden="true"></i> CSV & PDF export</span>
+                <h3>Awaiting Your Amount</h3>
+                <p>Enter any amount in the calculator above, then click <strong>Generate Distribution</strong>. Your AI-powered note breakdown will appear here — instantly.</p>
+                <div class="idle-features" aria-label="Key features">
+                    <span><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Random Forest accuracy</span>
+                    <span><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Millisecond response</span>
+                    <span><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Exportable reports</span>
                 </div>
             </div>
 
             <!-- Active State -->
             <div id="resultsActiveState" class="active-state hidden">
 
-                <!-- Status Badge (managed by JS) -->
+                <!-- Status Badge — text & class managed entirely by JS -->
                 <div id="statusBadge" class="status-badge success-badge" role="status">
                     <div class="checkmark-circle"><div class="checkmark-draw"></div></div>
                     <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-                    Distribution Generated Successfully
+                    Prediction Complete &mdash; Amount Verified
                 </div>
 
                 <!-- Summary Stats -->
                 <div class="summary-row-cards">
                     <div class="summary-stat-card glass-card">
-                        <div class="stat-label">Entered Amount</div>
-                        <div class="stat-value" id="summaryEntered">Rs. 0</div>
+                        <div class="stat-label">Target Amount</div>
+                        <div class="stat-value" id="summaryEntered">Rs. —</div>
                     </div>
                     <div class="summary-stat-card glass-card">
-                        <div class="stat-label">Calculated Total</div>
-                        <div class="stat-value" id="summaryTotal">Rs. 0</div>
+                        <div class="stat-label">Computed Total</div>
+                        <div class="stat-value" id="summaryTotal">Rs. —</div>
                     </div>
                     <div class="summary-stat-card glass-card">
-                        <div class="stat-label">Match Status</div>
+                        <div class="stat-label">Accuracy Check</div>
                         <div class="stat-value">
-                            <span class="status-indicator pass" id="summaryStatus">VALID</span>
+                            <span class="status-indicator pass" id="summaryStatus">MATCHED</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Notes Grid (populated by JS) -->
-                <div id="notesGrid" class="notes-grid" aria-label="Currency note distribution results"></div>
+                <!-- Notes Grid — populated by JS -->
+                <div id="notesGrid" class="notes-grid" aria-label="Currency note distribution by denomination" aria-live="polite"></div>
 
-                <!-- Export Actions -->
+                <!-- Export -->
                 <div class="export-actions">
-                    <button id="downloadCsvBtn" class="btn btn-outline" aria-label="Export results as CSV">
+                    <button id="downloadCsvBtn" class="btn btn-outline" aria-label="Download results as a CSV spreadsheet">
                         <i class="fa-solid fa-file-csv" aria-hidden="true"></i>
-                        Export CSV
+                        Download CSV Report
                     </button>
-                    <button id="downloadPdfBtn" class="btn btn-outline" aria-label="Export results as PDF">
+                    <button id="downloadPdfBtn" class="btn btn-outline" aria-label="Download results as a PDF document">
                         <i class="fa-solid fa-file-pdf" aria-hidden="true"></i>
-                        Export PDF
+                        Download PDF Report
                     </button>
                 </div>
 
@@ -289,13 +290,13 @@
                             <i class="fa-solid fa-clock-rotate-left"></i>
                         </div>
                         <div>
-                            <h2 id="historyTitle">Prediction History</h2>
-                            <p>Your last 10 predictions — stored locally</p>
+                            <h2 id="historyTitle">Prediction Log</h2>
+                            <p>Your last 10 predictions &mdash; saved locally in your browser. No data leaves your device.</p>
                         </div>
                     </div>
                     <button id="clearHistoryBtn" class="btn-danger-ghost" aria-label="Clear all prediction history">
                         <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
-                        Clear All
+                        Clear Log
                     </button>
                 </div>
 
@@ -303,16 +304,16 @@
                     <table class="history-table" id="historyTable">
                         <thead>
                             <tr>
-                                <th scope="col">Timestamp</th>
-                                <th scope="col">Amount</th>
+                                <th scope="col">Time</th>
+                                <th scope="col">Target (Rs.)</th>
                                 <th scope="col">Rs.1000</th>
                                 <th scope="col">Rs.500</th>
                                 <th scope="col">Rs.100</th>
                                 <th scope="col">Rs.50</th>
                                 <th scope="col">Rs.20</th>
                                 <th scope="col">Rs.10</th>
-                                <th scope="col">Total</th>
-                                <th scope="col">Status</th>
+                                <th scope="col">Computed (Rs.)</th>
+                                <th scope="col">Result</th>
                             </tr>
                         </thead>
                         <tbody id="historyTableBody">
@@ -321,7 +322,7 @@
                     </table>
                     <div class="no-history-message" id="noHistoryMessage" aria-live="polite">
                         <i class="fa-solid fa-inbox" aria-hidden="true"></i>
-                        <p>No predictions yet. Try one above!</p>
+                        <p>Your prediction log is empty. Generate a breakdown above to start tracking your history.</p>
                     </div>
                 </div>
             </div>
@@ -336,30 +337,32 @@
                     <i class="fa-solid fa-money-bill-wave" aria-hidden="true"></i>
                     <span>PakNotes AI</span>
                 </div>
-                <p>AI-powered Pakistani currency note distribution predictor. Built for accuracy, speed, and simplicity.</p>
+                <p>An AI tool that uses a trained machine learning model to instantly distribute any Pakistani currency amount into the optimal denomination breakdown. Free, private, and instant.</p>
                 <div class="footer-social">
-                    <a href="https://github.com/veosdrnawaz" target="_blank" rel="noopener noreferrer" aria-label="GitHub Repository">
-                        <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub
+                    <a href="https://github.com/veosdrnawaz" target="_blank" rel="noopener noreferrer" aria-label="View source code on GitHub">
+                        <i class="fa-brands fa-github" aria-hidden="true"></i> View on GitHub
                     </a>
                 </div>
             </div>
             <div class="footer-cols">
                 <div class="footer-col">
-                    <h4>Product</h4>
+                    <h4>Navigate</h4>
                     <a href="#hero">Home</a>
                     <a href="#how-it-works">How It Works</a>
-                    <a href="#resultsPanel">Predict Now</a>
+                    <a href="#resultsPanel">Try the Predictor</a>
+                    <a href="#historyTitle">Prediction Log</a>
                 </div>
                 <div class="footer-col">
-                    <h4>Resources</h4>
+                    <h4>Open Source</h4>
                     <a href="https://github.com/veosdrnawaz/pcnd" target="_blank" rel="noopener noreferrer">Source Code</a>
-                    <a href="https://github.com/veosdrnawaz" target="_blank" rel="noopener noreferrer">Developer</a>
+                    <a href="https://github.com/veosdrnawaz" target="_blank" rel="noopener noreferrer">@veosdrnawaz</a>
+                    <a href="https://github.com/veosdrnawaz/pcnd" target="_blank" rel="noopener noreferrer">Report an Issue</a>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <span>Built with <i class="fa-solid fa-heart footer-heart" aria-hidden="true"></i> &middot; Credit goes to Dear Sir Zafar Iqbal</span>
-            <span>&copy; 2025 PakNotes AI &middot; github.com/veosdrnawaz</span>
+            <span>Crafted with <i class="fa-solid fa-heart footer-heart" aria-hidden="true"></i> for educational purposes &middot; Supervised by Sir Zafar Iqbal</span>
+            <span>&copy; 2025 PakNotes AI &middot; Open source &middot; No data collected</span>
         </div>
     </footer>
 
@@ -369,13 +372,11 @@
     <!-- Inline: Navbar scroll + mobile menu -->
     <script>
         (function () {
-            // Navbar scroll effect
             var navbar = document.getElementById('navbar');
             window.addEventListener('scroll', function () {
                 navbar.classList.toggle('scrolled', window.scrollY > 40);
             }, { passive: true });
 
-            // Mobile menu toggle
             var mobileBtn = document.getElementById('mobileMenuBtn');
             var navLinks = document.getElementById('navLinks');
             if (mobileBtn && navLinks) {
@@ -384,7 +385,6 @@
                     mobileBtn.setAttribute('aria-expanded', isOpen);
                     mobileBtn.classList.toggle('active', isOpen);
                 });
-                // Close menu on nav link click
                 navLinks.querySelectorAll('.nav-link').forEach(function (link) {
                     link.addEventListener('click', function () {
                         navLinks.classList.remove('open');
