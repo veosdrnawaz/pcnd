@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pakistani Currency Note Distribution Predictor</title>
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- jsPDF library for PDF export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+    <!-- Local Stylesheet -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="background-decorations">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <div class="app-container">
+        <header class="app-header">
+            <div class="logo-area">
+                <i class="fa-solid fa-money-bill-transfer logo-icon"></i>
+                <h1>Pak Currency <span>Predictor</span></h1>
+            </div>
+            <button id="themeToggleBtn" class="theme-toggle" aria-label="Toggle Theme">
+                <i class="fa-solid fa-moon moon-icon"></i>
+                <i class="fa-solid fa-sun sun-icon"></i>
+            </button>
+        </header>
+
+        <main class="dashboard-grid">
+            <!-- Left Panel: Input & Control -->
+            <section class="card glass-card control-panel">
+                <div class="card-header">
+                    <h2>Predict Distribution</h2>
+                    <p>Enter any amount to predict its optimal currency note distribution.</p>
+                </div>
+                
+                <form id="predictionForm" class="prediction-form" onsubmit="event.preventDefault();">
+                    <div class="input-group">
+                        <label for="amountInput">Amount (Rs.)</label>
+                        <div class="input-wrapper">
+                            <span class="currency-prefix">Rs.</span>
+                            <input type="number" id="amountInput" placeholder="e.g. 5230" min="10" step="10" required autocomplete="off">
+                        </div>
+                        <span class="input-helper"><i class="fa-solid fa-circle-info"></i> Multiples of 10 only (min. 10, max. 500,000)</span>
+                    </div>
+
+                    <div class="error-banner" id="errorBanner">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <span id="errorMessage">Invalid amount entered.</span>
+                    </div>
+
+                    <div class="button-row">
+                        <button type="submit" id="predictBtn" class="btn btn-primary">
+                            <span class="btn-text">Predict Notes</span>
+                            <div class="btn-loader">
+                                <div class="spinner"></div>
+                            </div>
+                        </button>
+                        <button type="button" id="resetBtn" class="btn btn-secondary">Reset</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Right Panel: Results & Cards -->
+            <section class="card glass-card results-panel" id="resultsPanel">
+                <!-- Idle State -->
+                <div class="panel-state-idle" id="resultsIdleState">
+                    <div class="idle-graphic">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                    <h3>Waiting for Prediction</h3>
+                    <p>Enter an amount on the left and click Predict to generate the note distribution.</p>
+                </div>
+
+                <!-- Active Result State -->
+                <div class="panel-state-active hidden" id="resultsActiveState">
+                    <div class="success-header">
+                        <div class="success-icon-wrapper">
+                            <div class="checkmark-circle">
+                                <div class="checkmark-draw"></div>
+                            </div>
+                        </div>
+                        <div class="status-badge success-badge" id="statusBadge">
+                            <i class="fa-solid fa-circle-check"></i> Distribution Generated Successfully
+                        </div>
+                    </div>
+
+                    <div class="results-layout">
+                        <!-- Cards Visualization -->
+                        <div class="notes-grid" id="notesGrid">
+                            <!-- Dynamically populated note items -->
+                        </div>
+
+                        <!-- Data details -->
+                        <div class="summary-details">
+                            <div class="summary-row">
+                                <span>Entered Amount</span>
+                                <span class="summary-val" id="summaryEntered">Rs. 0</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Calculated Total</span>
+                                <span class="summary-val" id="summaryTotal">Rs. 0</span>
+                            </div>
+                            <div class="summary-row status-row">
+                                <span>Status</span>
+                                <span class="status-indicator pass" id="summaryStatus">VALID</span>
+                            </div>
+                        </div>
+
+                        <!-- Export Row -->
+                        <div class="export-actions">
+                            <button id="downloadCsvBtn" class="btn btn-icon"><i class="fa-solid fa-file-csv"></i> Save CSV</button>
+                            <button id="downloadPdfBtn" class="btn btn-icon"><i class="fa-solid fa-file-pdf"></i> Save PDF</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Bottom Panel: History -->
+        <section class="card glass-card history-card">
+            <div class="history-header">
+                <div class="history-title">
+                    <i class="fa-solid fa-history"></i>
+                    <h2>Prediction History</h2>
+                </div>
+                <button id="clearHistoryBtn" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i> Clear History</button>
+            </div>
+            
+            <div class="table-container">
+                <table class="history-table" id="historyTable">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Amount (Rs.)</th>
+                            <th>Rs.1000</th>
+                            <th>Rs.500</th>
+                            <th>Rs.100</th>
+                            <th>Rs.50</th>
+                            <th>Rs.20</th>
+                            <th>Rs.10</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyTableBody">
+                        <!-- Dynamically populated history -->
+                    </tbody>
+                </table>
+                <div class="no-history-message" id="noHistoryMessage">
+                    No predictions made yet. Try one!
+                </div>
+            </div>
+        </section>
+
+        <footer class="app-footer">
+            <p>Built with <i class="fa-solid fa-heart footer-heart"></i> &middot; Pakistani Currency Note Distribution System</p>
+            <p class="github-repo"><a href="https://github.com/veosdrnawaz" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> github.com/veosdrnawaz</a></p>
+        </footer>
+    </div>
+</body>
+</html>
