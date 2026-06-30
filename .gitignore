@@ -1,0 +1,17 @@
+# Model & data files (too large for GitHub)
+currency_model.pkl
+dataset.csv
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment
+.env
+venv/
+.venv/
+
+# OS
+.DS_Store
+Thumbs.db
