@@ -6,12 +6,13 @@
 ------------------------------------------------------------------------
 PakNotes AI is a state-of-the-art web application designed to calculate
 and predict the most efficient distribution of Pakistani currency note
-denominations for any given amount (from Rs.10 up to Rs.500,000). 
+denominations for any given amount (from Rs.10 up to Rs.10,000,000,000). 
 By combining a trained Machine Learning model with deterministic 
 mathematical fallbacks, the system provides accurate, instant, and 
 verifiable note breakdowns.
 
 Supported Denominations:
+- Rs. 5000 (New)
 - Rs. 1000
 - Rs. 500
 - Rs. 100
@@ -37,7 +38,7 @@ The system follows a modern decoupled architecture:
 
 - Frontend: 
   * HTML5 & Vanilla Javascript (Client-side logic, client-side exports)
-  * Vanilla CSS (Premium glassmorphic aesthetic, dark/light theme)
+  * Vanilla CSS (Premium glassmorphic aesthetic, default light theme)
   * Font Awesome (Iconography)
   * jsPDF & jsPDF-AutoTable (On-the-fly PDF generation)
 
@@ -53,7 +54,7 @@ The system follows a modern decoupled architecture:
 
 4. MODEL TRAINING & THE CORRECTION PARADIGM
 ------------------------------------------------------------------------
-A synthetic dataset containing 50,000 samples mapping numeric amounts
+A synthetic dataset containing 100,000 samples mapping numeric amounts
 to their correct note combinations is generated based on a specific 
 set of algorithmic rules:
 - Inclusion of at least one Rs.10 note (if amount >= 10).
@@ -61,7 +62,8 @@ set of algorithmic rules:
 - One Rs.50 note if needed to make the remainder a multiple of 100.
 - Rs.100 notes to bring the remainder to a multiple of 500.
 - Rs.500 notes to bring the remainder to a multiple of 1000.
-- Rs.1000 notes for the remaining bulk amount.
+- Rs.1000 notes to bring the remainder to a multiple of 5000.
+- Rs.5000 notes for the remaining bulk amount.
 
 The RandomForestRegressor is trained to learn these distribution curves.
 
@@ -71,12 +73,12 @@ FastAPI backend utilizes a Hybrid Solver pipeline.
 1. The amount is sent to the model for prediction.
 2. The predicted note counts are rounded to integers.
 3. The server computes the total value of these notes:
-   Total = (1000 * n1000) + (500 * n500) + ... + (10 * n10)
+   Total = (5000 * n5000) + (1000 * n1000) + ... + (10 * n10)
 4. If Total EXACTLY equals the Input Amount, the model's prediction is
    accepted.
-5. If there is any mismatch (due to rounding limits on unseen splits), 
-   the backend runs the exact mathematical solver to return the correct 
-   counts.
+5. If there is any mismatch (due to rounding limits on unseen splits or 
+   amounts exceeding the 1M training range), the backend runs the exact 
+   mathematical solver to return the correct counts.
 This guarantees 100% mathematical accuracy while demonstrating the 
 practical application of ML model verification.
 
@@ -88,8 +90,8 @@ practical application of ML model verification.
   spreadsheet or a formatted, printable PDF statement in one click.
 - Browser History: Log up to 10 previous predictions locally using the
   browser's localStorage API.
-- Theme Toggle: Instant transition between Dark Mode and Light Mode, 
-  updating colors, shadows, and contrast settings dynamically.
+- Theme Toggle: Instant transition between Light Mode (Default) and Dark
+  Mode, updating colors, shadows, and contrast settings dynamically.
 - Responsive Design: Fully optimized for mobile, tablet, and widescreen
   desktop viewports.
 

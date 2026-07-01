@@ -17,6 +17,7 @@
     --error:   #EF4444;
 
     /* Denomination Colors (used as --accent on note cards via JS) */
+    --note-5000: #D97706;
     --note-1000: #8B5CF6;
     --note-500:  #3B82F6;
     --note-100:  #10B981;

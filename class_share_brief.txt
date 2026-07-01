@@ -18,8 +18,8 @@ problems it solves, and how it works.
 ------------------------------------------------------------------------
 PakNotes AI is a web-based financial utility tool that instantly 
 determines the most efficient combination of Pakistani currency notes 
-(Rs.1000, Rs.500, Rs.100, Rs.50, Rs.20, and Rs.10) for any cash amount 
-you enter (up to Rs. 500,000).
+(including the new Rs.5000 notes, Rs.1000, Rs.500, Rs.100, Rs.50, 
+Rs.20, and Rs.10) for any cash amount you enter.
 
 ------------------------------------------------------------------------
 2. WHAT PROBLEM DOES IT SOLVE?
@@ -34,6 +34,8 @@ shops, deciding which currency notes to distribute is a recurring task:
 PakNotes AI solves this by automating the optimal distribution strategy:
 - It guarantees that at least one Rs.10 note is always included for 
   transactions greater than Rs.10, so the recipient has change.
+- It leverages Rs. 5000 notes for large transfers to minimize the bulk 
+  number of physical bills.
 - It calculates the precise distribution in milliseconds using machine 
   learning.
 - It prevents manual mathematical errors.
@@ -55,15 +57,17 @@ PakNotes AI solves this by automating the optimal distribution strategy:
 - Backend (FastAPI & Python): A high-performance Python backend server
   that handles prediction requests.
 - Machine Learning (Scikit-Learn & RandomForest): A Multi-Output 
-  RandomForest model trained on a custom dataset of 50,000 entries, 
-  learning the optimal note distribution curves.
+  RandomForest model trained on a custom dataset of 100,000 entries, 
+  learning the optimal note distribution curves (up to Rs. 1,000,000).
 - Hybrid Logic Guard: A validation script on the backend ensures that 
   if the machine learning model's output deviates by even a single Rupee, 
   it falls back to a deterministic exact-match algorithm, securing 100% 
-  mathematical accuracy.
+  mathematical accuracy. This allows users to request arbitrarily large 
+  amounts (e.g. up to 10 Billion) without bounds.
 - Frontend (Glassmorphic HTML/CSS/JS): A gorgeous user interface 
-  featuring dark/light theme toggling, live history log, micro-animations, 
-  and options to download reports as CSV or printable PDF files.
+  featuring dark/light theme toggling (loading in Light Mode by default), 
+  live history log, micro-animations, and options to download reports 
+  as CSV or printable PDF files.
 
 ------------------------------------------------------------------------
 5. ACKNOWLEDGEMENT & GRATITUDE

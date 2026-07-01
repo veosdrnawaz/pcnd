@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let history = JSON.parse(localStorage.getItem('currency_history') || '[]');
 
     // Initialize Theme
-    const savedTheme = localStorage.getItem('theme') || 'dark';
+    const savedTheme = localStorage.getItem('theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
     updateThemeIcon(savedTheme);
 
@@ -47,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function updateThemeIcon(theme) {
-        // Accessibility and visual sync (handled via CSS selectors mostly)
         if (theme === 'dark') {
             themeToggleBtn.title = "Switch to Light Mode";
         } else {
@@ -91,8 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        if (amount > 500000) {
-            showError("Maximum allowed amount is Rs. 500,000.");
+        if (amount > 10000000000) {
+            showError("Amount exceeds max supported limit of Rs. 10 Billion.");
             return;
         }
 
@@ -166,6 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Populate Notes Grid
         notesGrid.innerHTML = '';
         const notes = [
+            { key: '5000', label: 'Rs. 5000', color: '--note-5000' },
             { key: '1000', label: 'Rs. 1000', color: '--note-1000' },
             { key: '500', label: 'Rs. 500', color: '--note-500' },
             { key: '100', label: 'Rs. 100', color: '--note-100' },
@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const timestamp = new Date().toLocaleString();
         
         let calculatedTotal = 0;
-        const denoms = ['1000', '500', '100', '50', '20', '10'];
+        const denoms = ['5000', '1000', '500', '100', '50', '20', '10'];
         denoms.forEach(d => {
             calculatedTotal += (data[d] || 0) * parseInt(d, 10);
         });
@@ -228,6 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const newRecord = {
             timestamp,
             amount: data.amount,
+            n5000: data['5000'] || 0,
             n1000: data['1000'] || 0,
             n500: data['500'] || 0,
             n100: data['100'] || 0,
@@ -266,12 +267,13 @@ document.addEventListener('DOMContentLoaded', () => {
             tr.innerHTML = `
                 <td>${item.timestamp}</td>
                 <td>Rs. ${item.amount.toLocaleString()}</td>
-                <td>${item.n1000}</td>
-                <td>${item.n500}</td>
-                <td>${item.n100}</td>
-                <td>${item.n50}</td>
-                <td>${item.n20}</td>
-                <td>${item.n10}</td>
+                <td>${item.n5000 || 0}</td>
+                <td>${item.n1000 || 0}</td>
+                <td>${item.n500 || 0}</td>
+                <td>${item.n100 || 0}</td>
+                <td>${item.n50 || 0}</td>
+                <td>${item.n20 || 0}</td>
+                <td>${item.n10 || 0}</td>
                 <td>Rs. ${item.total.toLocaleString()}</td>
                 <td><span class="status-indicator ${badgeClass}">${item.status.toUpperCase()}</span></td>
             `;
@@ -296,6 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const p = currentPrediction;
         const csvRows = [
             ['Note Denomination', 'Count', 'Subtotal (Rs.)'],
+            ['5000', p['5000'] || 0, (p['5000'] || 0) * 5000],
             ['1000', p['1000'] || 0, (p['1000'] || 0) * 1000],
             ['500', p['500'] || 0, (p['500'] || 0) * 500],
             ['100', p['100'] || 0, (p['100'] || 0) * 100],
@@ -377,22 +380,24 @@ document.addEventListener('DOMContentLoaded', () => {
         // Table headers and columns
         const tableColumns = ["Note Denomination (Rs.)", "Note Count", "Subtotal (Rs.)"];
         const tableRows = [
-            ["Rs. 1000", p['1000'] || 0, `Rs. ${(p['1000'] || 0 * 1000).toLocaleString()}`],
-            ["Rs. 500", p['500'] || 0, `Rs. ${(p['500'] || 0 * 500).toLocaleString()}`],
-            ["Rs. 100", p['100'] || 0, `Rs. ${(p['100'] || 0 * 100).toLocaleString()}`],
-            ["Rs. 50", p['50'] || 0, `Rs. ${(p['50'] || 0 * 50).toLocaleString()}`],
-            ["Rs. 20", p['20'] || 0, `Rs. ${(p['20'] || 0 * 20).toLocaleString()}`],
-            ["Rs. 10", p['10'] || 0, `Rs. ${(p['10'] || 0 * 10).toLocaleString()}`],
+            ["Rs. 5000", p['5000'] || 0, `Rs. ${((p['5000'] || 0) * 5000).toLocaleString()}`],
+            ["Rs. 1000", p['1000'] || 0, `Rs. ${((p['1000'] || 0) * 1000).toLocaleString()}`],
+            ["Rs. 500", p['500'] || 0, `Rs. ${((p['500'] || 0) * 500).toLocaleString()}`],
+            ["Rs. 100", p['100'] || 0, `Rs. ${((p['100'] || 0) * 100).toLocaleString()}`],
+            ["Rs. 50", p['50'] || 0, `Rs. ${((p['50'] || 0) * 50).toLocaleString()}`],
+            ["Rs. 20", p['20'] || 0, `Rs. ${((p['20'] || 0) * 20).toLocaleString()}`],
+            ["Rs. 10", p['10'] || 0, `Rs. ${((p['10'] || 0) * 10).toLocaleString()}`],
             [{ content: "Total Value", colSpan: 2, styles: { halign: 'right', fontStyle: 'bold' } }, { content: `Rs. ${p.amount.toLocaleString()}`, styles: { fontStyle: 'bold', textColor: secondaryColor } }]
         ];
 
         // Format raw rows to ensure subtotal math is formatted nicely
-        tableRows[0][2] = `Rs. ${((p['1000'] || 0) * 1000).toLocaleString()}`;
-        tableRows[1][2] = `Rs. ${((p['500'] || 0) * 500).toLocaleString()}`;
-        tableRows[2][2] = `Rs. ${((p['100'] || 0) * 100).toLocaleString()}`;
-        tableRows[3][2] = `Rs. ${((p['50'] || 0) * 50).toLocaleString()}`;
-        tableRows[4][2] = `Rs. ${((p['20'] || 0) * 20).toLocaleString()}`;
-        tableRows[5][2] = `Rs. ${((p['10'] || 0) * 10).toLocaleString()}`;
+        tableRows[0][2] = `Rs. ${((p['5000'] || 0) * 5000).toLocaleString()}`;
+        tableRows[1][2] = `Rs. ${((p['1000'] || 0) * 1000).toLocaleString()}`;
+        tableRows[2][2] = `Rs. ${((p['500'] || 0) * 500).toLocaleString()}`;
+        tableRows[3][2] = `Rs. ${((p['100'] || 0) * 100).toLocaleString()}`;
+        tableRows[4][2] = `Rs. ${((p['50'] || 0) * 50).toLocaleString()}`;
+        tableRows[5][2] = `Rs. ${((p['20'] || 0) * 20).toLocaleString()}`;
+        tableRows[6][2] = `Rs. ${((p['10'] || 0) * 10).toLocaleString()}`;
 
         // AutoTable generation
         doc.autoTable({

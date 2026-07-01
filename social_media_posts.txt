@@ -17,19 +17,19 @@ During my learning journey, I wanted to build a practical tool that sits at the 
 ATM operations, bank cash desks, and retailers constantly need to distribute cash denominations efficiently. How can we automate this layout while guaranteeing change rules (such as ensuring at least one Rs.10 note is always included for cash breakdowns)?
 
 💡 The Solution:
-PakNotes AI uses a hybrid pipeline to predict the optimal breakdown of Rs.1000, Rs.500, Rs.100, Rs.50, Rs.20, and Rs.10 notes for any input amount up to Rs. 500,000.
+PakNotes AI uses a hybrid pipeline to predict the optimal breakdown of Rs.5000, Rs.1000, Rs.500, Rs.100, Rs.50, Rs.20, and Rs.10 notes for any input amount, with no upper limits.
 
 🛠️ The Tech Stack:
 - Backend: FastAPI (Python) for asynchronous, high-speed API endpoints.
-- Machine Learning: Trained a Scikit-Learn RandomForestRegressor (wrapped in a MultiOutputRegressor) on a custom dataset of 50,000 generated distribution logs.
+- Machine Learning: Trained a Scikit-Learn RandomForestRegressor (wrapped in a MultiOutputRegressor) on a custom dataset of 100,000 generated distribution logs.
 - Math Verification: A validation layer checks model outputs and falls back to a deterministic algorithm if there's any rounding mismatch, guaranteeing 100% mathematical accuracy.
-- Frontend: A premium glassmorphism dashboard built with responsive HTML5, Vanilla CSS, and JS. It supports Dark/Light theme toggles, local storage logs, and client-side exports to CSV and PDF!
+- Frontend: A premium glassmorphism dashboard built with responsive HTML5, Vanilla CSS, and JS. It supports Dark/Light theme toggles (opening in light mode by default), local storage logs, and client-side exports to CSV and PDF!
 
 🏆 Special Thanks:
 This project was made possible under the supervision and guidance of my mentor, Sir Zafar Iqbal. Thank you, Sir, for inspiring the mindset to solve real-world problems.
 
-👉 View the code on GitHub: [GitHub Link]
-👉 Explore my portfolio: [Portfolio Link]
+👉 View the code on GitHub: https://github.com/veosdrnawaz
+👉 Explore my portfolio: https://github.com/veosdrnawaz
 
 #Python #FastAPI #MachineLearning #WebDevelopment #DataScience #ArtificialIntelligence #RandomForest #Fintech #UIUX #OpenSource
 
@@ -40,13 +40,13 @@ POST TEMPLATE 2: TWITTER / X (Short & Punchy)
 ------------------------------------------------------------------------
 💵 Distributed by AI. Accurate to the Rupee.
 
-Introducing PakNotes AI! Enter any Pakistani currency amount and get the optimal denomination breakdown (Rs.1000 down to Rs.10) in milliseconds.
+Introducing PakNotes AI! Enter any Pakistani currency amount and get the optimal denomination breakdown (including Rs.5000 notes down to Rs.10) in milliseconds.
 
 🤖 RandomForest ML + Python FastAPI
-🎨 Glassmorphism Dark/Light UI
+🎨 Glassmorphism Dark/Light UI (Default Light)
 📄 Export PDF & CSV reports
 
-Code: [GitHub Link]
+Code: https://github.com/veosdrnawaz
 Supervised by Sir Zafar Iqbal.
 
 #Python #MachineLearning #WebDev #FastAPI #AI
@@ -58,18 +58,19 @@ POST TEMPLATE 3: WHATSAPP / FACEBOOK (Casual & Informative)
 ========================================================================
 Hi everyone! I just launched a new web project called *PakNotes AI*! 🇵🇰💵
 
-It is an AI-powered Pakistani Currency Note Predictor. You enter any cash amount (e.g. 15,400) and it instantly calculates how many notes of Rs.1000, Rs.500, Rs.100, Rs.50, Rs.20, and Rs.10 you need.
+It is an AI-powered Pakistani Currency Note Predictor. You enter any cash amount (e.g. 15,400) and it instantly calculates how many notes of Rs.5000, Rs.1000, Rs.500, Rs.100, Rs.50, Rs.20, and Rs.10 you need.
 
 Here is what makes it cool:
 ✅ Millisecond-fast predictions using a trained Machine Learning model.
 ✅ 100% accurate note matching using a built-in math solver guard.
-✅ Slick glassmorphic look that works in Dark Mode and Light Mode.
+✅ Support for all denominations including Rs. 5000.
+✅ Slick glassmorphic look that works in Light Mode and Dark Mode.
 ✅ Export predictions to Excel/CSV or print them directly to PDF.
 ✅ Save history logs locally in your browser.
 
-This project was built under the guidance of my teacher, Sir Zafar Iqbal. 
+This project was built by me (Khalil Ahmad) under the guidance of my teacher, Sir Zafar Iqbal. 
 
-Check out the project here: [GitHub Link]
+Check out the project here: https://github.com/veosdrnawaz
 Let me know what you think! 🚀
 
 ---

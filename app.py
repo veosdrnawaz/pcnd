@@ -34,11 +34,12 @@ else:
 
 # Pydantic Schemas
 class PredictRequest(BaseModel):
-    amount: int = Field(..., description="The cash amount to distribute", ge=10, le=500000)
+    amount: int = Field(..., description="The cash amount to distribute", ge=10, le=100000000000)
 
 class PredictResponse(BaseModel):
     amount: int
     total: int
+    n5000: int
     n1000: int
     n500: int
     n100: int
@@ -46,18 +47,6 @@ class PredictResponse(BaseModel):
     n20: int
     n10: int
 
-    # Alias to match specific output requirements (e.g. POST returns note counts as strings)
-    # The requirement specifies returning:
-    # {
-    #     "amount":5000,
-    #     "1000":4,
-    #     "500":1,
-    #     "100":4,
-    #     "50":1,
-    #     "20":2,
-    #     "10":1,
-    #     "total":5000
-    # }
     class Config:
         populate_by_name = True
 
@@ -68,7 +57,7 @@ def get_exact_distribution(amount: int) -> dict:
     """
     Applies the fixed distribution algorithm rules sequentially.
     """
-    n1000 = n500 = n100 = n50 = n20 = n10 = 0
+    n5000 = n1000 = n500 = n100 = n50 = n20 = n10 = 0
     
     if amount >= 10:
         n10 = 1
@@ -107,16 +96,23 @@ def get_exact_distribution(amount: int) -> dict:
         n500 = 0
         
     if rem >= 1000:
-        n1000 = rem // 1000
+        n1000 = (rem % 5000) // 1000
         rem -= 1000 * n1000
     else:
         n1000 = 0
+        
+    if rem >= 5000:
+        n5000 = rem // 5000
+        rem -= 5000 * n5000
+    else:
+        n5000 = 0
         
     if rem > 0:
         n10 += rem // 10
         rem = 0
         
     return {
+        "5000": n5000,
         "1000": n1000,
         "500": n500,
         "100": n100,
@@ -151,6 +147,7 @@ async def post_predict(payload: PredictRequest):
 
     # Initialize note counts
     note_counts = {
+        "5000": 0,
         "1000": 0,
         "500": 0,
         "100": 0,
@@ -163,19 +160,21 @@ async def post_predict(payload: PredictRequest):
 
     if model is not None:
         try:
-            # Predict counts (Y has shape: ["n1000", "n500", "n100", "n50", "n20", "n10"])
+            # Predict counts (Y has shape: ["n5000", "n1000", "n500", "n100", "n50", "n20", "n10"])
             pred = model.predict([[amount]])[0]
             
             # Map predictions to non-negative rounded integers
-            note_counts["1000"] = max(0, int(round(pred[0])))
-            note_counts["500"] = max(0, int(round(pred[1])))
-            note_counts["100"] = max(0, int(round(pred[2])))
-            note_counts["50"] = max(0, int(round(pred[3])))
-            note_counts["20"] = max(0, int(round(pred[4])))
-            note_counts["10"] = max(0, int(round(pred[5])))
+            note_counts["5000"] = max(0, int(round(pred[0])))
+            note_counts["1000"] = max(0, int(round(pred[1])))
+            note_counts["500"] = max(0, int(round(pred[2])))
+            note_counts["100"] = max(0, int(round(pred[3])))
+            note_counts["50"] = max(0, int(round(pred[4])))
+            note_counts["20"] = max(0, int(round(pred[5])))
+            note_counts["10"] = max(0, int(round(pred[6])))
 
             # Calculate total
             total = (
+                5000 * note_counts["5000"] +
                 1000 * note_counts["1000"] +
                 500 * note_counts["500"] +
                 100 * note_counts["100"] +
@@ -200,6 +199,7 @@ async def post_predict(payload: PredictRequest):
 
     # Re-calculate total to verify correctness
     final_total = (
+        5000 * note_counts["5000"] +
         1000 * note_counts["1000"] +
         500 * note_counts["500"] +
         100 * note_counts["100"] +
@@ -208,19 +208,9 @@ async def post_predict(payload: PredictRequest):
         10 * note_counts["10"]
     )
 
-    # Return exactly matching JSON structure as specified:
-    # {
-    #     "amount":5000,
-    #     "1000":4,
-    #     "500":1,
-    #     "100":4,
-    #     "50":1,
-    #     "20":2,
-    #     "10":1,
-    #     "total":5000
-    # }
     return {
         "amount": amount,
+        "5000": note_counts["5000"],
         "1000": note_counts["1000"],
         "500": note_counts["500"],
         "100": note_counts["100"],

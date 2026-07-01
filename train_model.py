@@ -10,7 +10,7 @@ def main():
     df = pd.read_csv("dataset.csv")
     
     X = df[["Amount"]]
-    Y = df[["n1000", "n500", "n100", "n50", "n20", "n10"]]
+    Y = df[["n5000", "n1000", "n500", "n100", "n50", "n20", "n10"]]
     
     print("Splitting dataset into train and test sets...")
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)

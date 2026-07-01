@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +20,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/style.css?v=3">
 </head>
 <body>
 
@@ -111,7 +111,7 @@
                                     class="amount-input"
                                     placeholder="e.g. 15,000"
                                     min="10"
-                                    max="500000"
+                                    max="10000000000"
                                     step="10"
                                     required
                                     autocomplete="off"
@@ -120,7 +120,7 @@
                             </div>
                             <p class="field-hint" id="fieldHint">
                                 <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
-                                Any multiple of Rs.10 &middot; Minimum Rs.10 &middot; Maximum Rs.500,000
+                                Any multiple of Rs.10 &middot; Minimum Rs.10
                             </p>
                         </div>
 
@@ -281,6 +281,7 @@
                             <tr>
                                 <th scope="col">Time</th>
                                 <th scope="col">Target (Rs.)</th>
+                                <th scope="col">Rs.5000</th>
                                 <th scope="col">Rs.1000</th>
                                 <th scope="col">Rs.500</th>
                                 <th scope="col">Rs.100</th>
@@ -317,20 +318,19 @@
                 <!-- Profile Card -->
                 <div class="dev-profile-card glass-card">
                     <div class="profile-photo-wrap">
-                        <div class="profile-photo-placeholder" aria-label="Developer Photo Placeholder">
-                            <i class="fa-solid fa-laptop-code"></i>
-                            <!-- <img src="[Developer Photo]" alt="[Developer Name]" class="profile-image"> -->
+                        <div class="profile-photo-placeholder" aria-label="Developer Photo">
+                            <img src="/static/developer.jpg" alt="Khalil Ahmad" class="profile-image" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                         <span class="status-indicator-badge" title="Available for freelance inquiries">
                             <span class="status-dot-pulse"></span> Available
                         </span>
                     </div>
 
-                    <h3 class="profile-name">[Developer Name]</h3>
-                    <p class="profile-title">[Developer Title / AI &amp; Python Engineer]</p>
+                    <h3 class="profile-name">Khalil Ahmad</h3>
+                    <p class="profile-title">AI &amp; Python Automation Specialist</p>
                     
                     <div class="profile-location">
-                        <i class="fa-solid fa-location-dot"></i> <span>[Developer Location, e.g., Lahore, Pakistan]</span>
+                        <i class="fa-solid fa-location-dot"></i> <span>Lahore, Pakistan</span>
                     </div>
 
                     <p class="profile-bio">
@@ -352,19 +352,19 @@
                 <div class="dev-details-column">
                     <div class="stats-row">
                         <div class="stat-box glass-card">
-                            <div class="stat-num">[15+]</div>
+                            <div class="stat-num">15+</div>
                             <div class="stat-label">Projects Completed</div>
                         </div>
                         <div class="stat-box glass-card">
-                            <div class="stat-num">[10+]</div>
+                            <div class="stat-num">12+</div>
                             <div class="stat-label">Technologies</div>
                         </div>
                         <div class="stat-box glass-card">
-                            <div class="stat-num">[2+ Yrs]</div>
+                            <div class="stat-num">2+ Yrs</div>
                             <div class="stat-label">Learning Journey</div>
                         </div>
                         <div class="stat-box glass-card">
-                            <div class="stat-num">[5+]</div>
+                            <div class="stat-num">8+</div>
                             <div class="stat-label">AI Solutions</div>
                         </div>
                     </div>
@@ -376,37 +376,37 @@
                         </p>
 
                         <div class="cta-buttons">
-                            <a href="mailto:[Email Address]" class="btn btn-primary cta-btn">
+                            <a href="mailto:khalilahmad.dev@gmail.com" class="btn btn-primary cta-btn">
                                 <i class="fa-solid fa-briefcase"></i> Hire Me
                             </a>
-                            <a href="https://wa.me/[WhatsApp-Number]" target="_blank" rel="noopener noreferrer" class="btn btn-secondary cta-btn">
+                            <a href="https://wa.me/923000000000" target="_blank" rel="noopener noreferrer" class="btn btn-secondary cta-btn">
                                 <i class="fa-solid fa-comments"></i> Let's Talk
                             </a>
-                            <a href="[Resume URL]" download class="btn btn-ghost cta-btn">
+                            <a href="#" download class="btn btn-ghost cta-btn">
                                 <i class="fa-solid fa-file-pdf"></i> Download Resume
                             </a>
-                            <a href="[GitHub URL]" target="_blank" rel="noopener noreferrer" class="btn btn-ghost cta-btn">
+                            <a href="https://github.com/veosdrnawaz" target="_blank" rel="noopener noreferrer" class="btn btn-ghost cta-btn">
                                 <i class="fa-brands fa-github"></i> View GitHub
                             </a>
-                            <a href="mailto:[Email Address]" class="btn btn-ghost cta-btn">
+                            <a href="mailto:khalilahmad.dev@gmail.com" class="btn btn-ghost cta-btn">
                                 <i class="fa-solid fa-envelope"></i> Contact Me
                             </a>
                         </div>
 
                         <div class="social-channels">
-                            <a href="[GitHub URL]" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub">
+                            <a href="https://github.com/veosdrnawaz" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub">
                                 <i class="fa-brands fa-github"></i>
                             </a>
-                            <a href="[LinkedIn URL]" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn">
+                            <a href="https://linkedin.com/in/veosdrnawaz" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn">
                                 <i class="fa-brands fa-linkedin-in"></i>
                             </a>
-                            <a href="mailto:[Email Address]" class="social-btn" aria-label="Email">
+                            <a href="mailto:khalilahmad.dev@gmail.com" class="social-btn" aria-label="Email">
                                 <i class="fa-solid fa-envelope"></i>
                             </a>
-                            <a href="[Portfolio URL]" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Portfolio">
+                            <a href="https://github.com/veosdrnawaz" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Portfolio">
                                 <i class="fa-solid fa-globe"></i>
                             </a>
-                            <a href="https://wa.me/[WhatsApp-Number]" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="WhatsApp">
+                            <a href="https://wa.me/923000000000" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="WhatsApp">
                                 <i class="fa-brands fa-whatsapp"></i>
                             </a>
                         </div>
@@ -443,15 +443,15 @@
 
                     <div class="mentor-details">
                         <div class="mentor-image-wrapper">
-                            <div class="mentor-photo-placeholder" aria-label="Mentor Photograph Placeholder">
+                            <div class="mentor-photo-placeholder" aria-label="Mentor Photograph">
                                 <i class="fa-solid fa-chalkboard-user"></i>
-                                <!-- <img src="[Mentor Photograph]" alt="Sir Zafar Iqbal" class="mentor-image"> -->
+                                <!-- <img src="/static/mentor.jpg" alt="Sir Zafar Iqbal" class="mentor-image"> -->
                             </div>
                         </div>
 
                         <div class="mentor-text-block">
                             <h3>Sir Zafar Iqbal</h3>
-                            <p class="mentor-pro-title">[Mentor Title / Python &amp; AI Architect]</p>
+                            <p class="mentor-pro-title">Senior Python Specialist &amp; AI Architect</p>
 
                             <p class="mentor-msg">
                                 This project became possible because of the knowledge, guidance, and continuous support received during my learning journey. By sharing deep technical expertise and professional wisdom, Sir Zafar Iqbal has shaped my approach to software development, problem solving, and building impactful digital solutions.
@@ -511,7 +511,7 @@
     </footer>
 
     <!-- Script -->
-    <script src="/static/script.js"></script>
+    <script src="/static/script.js?v=3"></script>
 
     <!-- UI Enhancements: navbar + mobile menu + auto-scroll -->
     <script>
