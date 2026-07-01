@@ -1,0 +1,76 @@
+========================================================================
+                     SOCIAL MEDIA SHARING KIT
+========================================================================
+Use these templates to share the PakNotes AI project across your
+professional and social platforms. Remember to replace brackets like 
+[GitHub Link] with your actual links!
+========================================================================
+
+------------------------------------------------------------------------
+POST TEMPLATE 1: LINKEDIN (Professional & Technical)
+------------------------------------------------------------------------
+🚀 Excited to share my latest project: PakNotes AI — Instant Pakistani Currency Note Distribution!
+
+During my learning journey, I wanted to build a practical tool that sits at the intersection of Machine Learning, Finance, and Modern Web Development. 
+
+💵 The Challenge:
+ATM operations, bank cash desks, and retailers constantly need to distribute cash denominations efficiently. How can we automate this layout while guaranteeing change rules (such as ensuring at least one Rs.10 note is always included for cash breakdowns)?
+
+💡 The Solution:
+PakNotes AI uses a hybrid pipeline to predict the optimal breakdown of Rs.1000, Rs.500, Rs.100, Rs.50, Rs.20, and Rs.10 notes for any input amount up to Rs. 500,000.
+
+🛠️ The Tech Stack:
+- Backend: FastAPI (Python) for asynchronous, high-speed API endpoints.
+- Machine Learning: Trained a Scikit-Learn RandomForestRegressor (wrapped in a MultiOutputRegressor) on a custom dataset of 50,000 generated distribution logs.
+- Math Verification: A validation layer checks model outputs and falls back to a deterministic algorithm if there's any rounding mismatch, guaranteeing 100% mathematical accuracy.
+- Frontend: A premium glassmorphism dashboard built with responsive HTML5, Vanilla CSS, and JS. It supports Dark/Light theme toggles, local storage logs, and client-side exports to CSV and PDF!
+
+🏆 Special Thanks:
+This project was made possible under the supervision and guidance of my mentor, Sir Zafar Iqbal. Thank you, Sir, for inspiring the mindset to solve real-world problems.
+
+👉 View the code on GitHub: [GitHub Link]
+👉 Explore my portfolio: [Portfolio Link]
+
+#Python #FastAPI #MachineLearning #WebDevelopment #DataScience #ArtificialIntelligence #RandomForest #Fintech #UIUX #OpenSource
+
+---
+
+------------------------------------------------------------------------
+POST TEMPLATE 2: TWITTER / X (Short & Punchy)
+------------------------------------------------------------------------
+💵 Distributed by AI. Accurate to the Rupee.
+
+Introducing PakNotes AI! Enter any Pakistani currency amount and get the optimal denomination breakdown (Rs.1000 down to Rs.10) in milliseconds.
+
+🤖 RandomForest ML + Python FastAPI
+🎨 Glassmorphism Dark/Light UI
+📄 Export PDF & CSV reports
+
+Code: [GitHub Link]
+Supervised by Sir Zafar Iqbal.
+
+#Python #MachineLearning #WebDev #FastAPI #AI
+
+---
+
+------------------------------------------------------------------------
+POST TEMPLATE 3: WHATSAPP / FACEBOOK (Casual & Informative)
+========================================================================
+Hi everyone! I just launched a new web project called *PakNotes AI*! 🇵🇰💵
+
+It is an AI-powered Pakistani Currency Note Predictor. You enter any cash amount (e.g. 15,400) and it instantly calculates how many notes of Rs.1000, Rs.500, Rs.100, Rs.50, Rs.20, and Rs.10 you need.
+
+Here is what makes it cool:
+✅ Millisecond-fast predictions using a trained Machine Learning model.
+✅ 100% accurate note matching using a built-in math solver guard.
+✅ Slick glassmorphic look that works in Dark Mode and Light Mode.
+✅ Export predictions to Excel/CSV or print them directly to PDF.
+✅ Save history logs locally in your browser.
+
+This project was built under the guidance of my teacher, Sir Zafar Iqbal. 
+
+Check out the project here: [GitHub Link]
+Let me know what you think! 🚀
+
+---
+========================================================================
